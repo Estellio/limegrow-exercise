@@ -7,7 +7,7 @@
     <title>Products</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
+<body class="--bs-light-bg-subtle">
 
     @auth
     <!-- When loged in, display button to log out -->
@@ -61,10 +61,10 @@
         </div>
     </div>
 
-    @if(true)
+    @if(session('success'))
     <div class="d-flex justify-content-center">
     <div class="alert alert-success alert-dismissible fade show col-8 col-sm-4 col-xl-3" role="alert">
-        It works<!--{{ session('success') }}-->
+        {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     </div>
@@ -124,6 +124,16 @@
     </div>
 
     @endauth
+
+    <div>
+        <h2>All Products</h2>
+        @foreach ($products as $product)
+        <div class="--bs-light-border-subtle">
+            <p>{{$product['name']}}</p>
+        </div>
+            
+        @endforeach
+    </div>
 
 </body>
 </html>
