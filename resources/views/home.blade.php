@@ -7,7 +7,7 @@
     <title>Products</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body class="--bs-light-bg-subtle">
+<body class="bg-dark">
 
     @auth
     <!-- When loged in, display button to log out -->
@@ -80,18 +80,18 @@
     </p>
     <!-- Login form -->
     <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-            <form action="/login" method="POST">
+        <div class="card card-body" style="background-color: #343a40">
+            <form action="/login" method="POST" class="d-flex flex-column align-items-center">
                 @csrf
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-3 mt-4 col-6 col-xl-4">
                     <input name="loginname" type="text" class="form-control" id="floatingInput" placeholder="Username" value="">
                     <label for="floatingInput">Username</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating col-6 col-xl-4">
                     <input name="loginpassword" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">Password</label>
                 </div>
-                <div class="d-grid gap-1 col-4 mx-auto my-4">
+                <div class="d-grid gap-1 col-2 mx-auto my-4">
                     <button class="btn btn-primary">Log In</button>
                 </div>
             </form>
@@ -105,18 +105,18 @@
         </button>
     </p>
     <div class="collapse" id="collapseExample2">
-        <div class="card card-body">
-            <form action="/register" method="POST">
+        <div class="card card-body" style="background-color: #343a40">
+            <form class="d-flex flex-column align-items-center" action="/register" method="POST">
                 @csrf
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-3 mt-4 col-6 col-xl-4">
                     <input name="name" type="text" class="form-control" id="floatingInput" placeholder="Username" value="">
                     <label for="floatingInput">Username</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating col-6 col-xl-4">
                     <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">Password</label>
                 </div>
-                <div class="d-grid gap-1 col-4 mx-auto my-4">
+                <div class="d-grid gap-1 col-2 mx-auto my-4">
                     <button class="btn btn-primary">Sign Up</button>
                 </div>
             </form>
@@ -125,14 +125,20 @@
 
     @endauth
 
-    <div>
-        <h2>All Products</h2>
-        @foreach ($products as $product)
-        <div class="--bs-light-border-subtle">
-            <p>{{$product['name']}}</p>
+    <div class="container mt-5">
+        <div class="row">
+            @foreach($products as $product)
+            <a href="/show-product/{{$product['id']}}" class="col-md-4 mb-4" style="text-decoration: none">
+                <div class="card h-100" style="background-color: #2b3035"> <!-- Use h-100 to ensure equal height for cards -->
+                    <div class="card-body">
+                        <h5 class="card-title text-light">{{ $product['name'] }}</h5>
+                        <h6 class="card-subtitle mb-4 text-light fw-light">{{ $product['category'] }}</h6>
+                        <h5 class="card-text text-end text-light">${{ number_format($product['price'], 2) }}</h5>
+                    </div>
+                </div>
+            </a>
+            @endforeach
         </div>
-            
-        @endforeach
     </div>
 
 </body>

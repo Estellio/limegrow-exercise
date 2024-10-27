@@ -28,4 +28,8 @@ class ProductController extends Controller
         
         return redirect('/');
     }
+
+    public function showProductView(Product $product) {
+        return view('show-product', ['product' => $product]);
+    }
 }

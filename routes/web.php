@@ -17,3 +17,4 @@ Route::post('/login', [AdminController::class, 'login']);
 
 // Product Controllers
 Route::post('/addproduct', [ProductController::class, 'addproduct']);
+Route::get('show-product/{product}', [ProductController::class, 'showProductView']);
