@@ -10,17 +10,75 @@
 <body>
 
     @auth
+    <!-- When loged in, display button to log out -->
     <form action="/logout" method="POST" class="gap-1 d-flex justify-content-end">
         @csrf
         <button type="submit" class="btn btn-danger m-3">Log Out</button>
     </form>
 
+    <!-- Form to add product -->
+    <p class="gap-1 d-flex justify-content-end">
+        <button class="btn btn-primary m-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          Add  A New Product
+        </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <form action="/addproduct" method="POST" id="productForm">
+                @csrf
+                <div class="mb-3">
+                    <label for="ean" class="form-label">International Article Number</label>
+                    <input type="text" class="form-control" maxlength="13" name="ean" id="ean" placeholder="1728336952832">
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" maxlength="50" name="name" id="name" placeholder="New Modern Sofa">
+                </div>
+                <select id="category" name="category" class="form-select" aria-label="Select category">
+                    <option selected value="Sofa">Sofa</option>
+                    <option value="Bed">Bed</option>
+                    <option value="Chair">Chair</option>
+                    <option value="Table">Table</option>
+                </select>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="price" class="form-label">Product Price (€)</label>
+                        <input type="number" min="0" max="9999.99" step="0.01" class="form-control" name="price" id="price" placeholder="399.99">
+                    </div>
+                    <div class="col-6">
+                        <label for="stock" class="form-label">Product Stock</label>
+                        <input type="number" min="0" max="2000" step="1" class="form-control" name="stock" id="stock" placeholder="129">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Product Description</label>
+                    <textarea class="form-control" name="description" id="description" rows="4"></textarea>
+                </div>
+                <div class="d-grid gap-1 col-4 mx-auto my-4">
+                    <button class="btn btn-success">Add Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if(true)
+    <div class="d-flex justify-content-center">
+    <div class="alert alert-success alert-dismissible fade show col-8 col-sm-4 col-xl-3" role="alert">
+        It works<!--{{ session('success') }}-->
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+    @endif
+
+
     @else
+    <!-- When not loged in, display log in button to toggle login form-->
     <p class="gap-1 d-flex justify-content-end">
         <button class="btn btn-warning m-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             Log In
         </button>
     </p>
+    <!-- Login form -->
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
             <form action="/login" method="POST">
@@ -40,7 +98,8 @@
         </div>
     </div>
 
-    <!--<p class="gap-1 d-flex justify-content-end">
+    <!-- Sugn up for user, only admins have accounts -->
+    <p class="gap-1 d-flex justify-content-end">
         <button class="btn btn-secondary m-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
             Sign Up
         </button>
@@ -62,7 +121,7 @@
                 </div>
             </form>
         </div>
-    </div> -->
+    </div>
 
     @endauth
 

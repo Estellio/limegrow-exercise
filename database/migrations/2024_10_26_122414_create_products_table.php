@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('ean');
-            $table->string('name');
+            $table->string('ean', 13);
+            $table->string('name', 50);
             $table->text('description');
             $table->decimal('price', 6, 2);
             $table->integer('stock');
-            $table->enum('category', ['sofa'], ['bed'], ['chair'], ['table']);
+            $table->string('category', 20);
             $table->timestamps();
         });
     }
