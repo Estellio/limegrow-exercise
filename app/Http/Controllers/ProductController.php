@@ -51,4 +51,9 @@ class ProductController extends Controller
         $product->update($incomingFields);
         return redirect('/');
     }
+
+    public function deleteProduct(Product $product) {
+        $product->delete();
+        return redirect('/');
+    }
 }

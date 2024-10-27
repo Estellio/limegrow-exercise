@@ -22,7 +22,7 @@
          <form action="/delete-product/{{$product['id']}}" method="POST" class="mt-4">
             @csrf
             @method('DELETE')
-            <button type="button" class="btn btn-danger">Delete Product</button>
+            <button type="submit" class="btn btn-danger">Delete Product</button>
          </form>
         @endauth
 

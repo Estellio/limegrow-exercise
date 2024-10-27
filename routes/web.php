@@ -20,3 +20,4 @@ Route::post('/addproduct', [ProductController::class, 'addproduct']);
 Route::get('/show-product/{product}', [ProductController::class, 'showProductView']);
 Route::get('/edit-product/{product}', [ProductController::class, 'showEditScreen']);
 Route::put('/edit-product/{product}', [ProductController::class, 'updateProduct']);
+Route::delete('/delete-product/{product}', [ProductController::class, 'deleteProduct']);
