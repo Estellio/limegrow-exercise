@@ -15,15 +15,18 @@
             <h4 class="fw-light mt-4">Left in stock: {{$product['stock']}}</h4>
             <h5 class="fw-light">Category: {{$product['category']}}</h5>
             <p class="text-center my-4" style="text-align: justify !important">{{$product['description']}}</p>
-            <h3 class="ms-auto fw-light mt-4 text-end">{{$product['price']}}€</h3>
+            <h3 class="ms-auto fw-light mt-4 text-end fw-semibold">{{$product['price']}}€</h3>
         </div>
+
+        @auth
+         <form action="/delete-product/{{$product['id']}}" method="POST" class="mt-4">
+            @csrf
+            @method('DELETE')
+            <button type="button" class="btn btn-danger">Delete Product</button>
+         </form>
+        @endauth
+
     </div>
-
-    @auth
-
-    @else
-
-    @endauth
 
 </body>
 </html>

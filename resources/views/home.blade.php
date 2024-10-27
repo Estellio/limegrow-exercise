@@ -23,15 +23,15 @@
         </button>
     </p>
     <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-            <form action="/addproduct" method="POST" id="productForm">
+        <div class="card card-body d-flex align-items-center" style="background-color: #343a40">
+            <form action="/addproduct" method="POST" id="productForm" class="col-8 col-xl-6">
                 @csrf
                 <div class="mb-3">
-                    <label for="ean" class="form-label">International Article Number</label>
+                    <label for="ean" class="form-label text-light">International Article Number</label>
                     <input type="text" class="form-control" maxlength="13" name="ean" id="ean" placeholder="1728336952832">
                 </div>
                 <div class="mb-3">
-                    <label for="name" class="form-label">Product Name</label>
+                    <label for="name" class="form-label text-light">Product Name</label>
                     <input type="text" class="form-control" maxlength="50" name="name" id="name" placeholder="New Modern Sofa">
                 </div>
                 <select id="category" name="category" class="form-select" aria-label="Select category">
@@ -40,18 +40,18 @@
                     <option value="Chair">Chair</option>
                     <option value="Table">Table</option>
                 </select>
-                <div class="row mb-3">
+                <div class="row mb-3 mt-3">
                     <div class="col-6">
-                        <label for="price" class="form-label">Product Price (€)</label>
+                        <label for="price" class="form-label text-light">Product Price (€)</label>
                         <input type="number" min="0" max="9999.99" step="0.01" class="form-control" name="price" id="price" placeholder="399.99">
                     </div>
                     <div class="col-6">
-                        <label for="stock" class="form-label">Product Stock</label>
+                        <label for="stock" class="form-label text-light">Product Stock</label>
                         <input type="number" min="0" max="2000" step="1" class="form-control" name="stock" id="stock" placeholder="129">
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label">Product Description</label>
+                    <label for="description" class="form-label text-light">Product Description</label>
                     <textarea class="form-control" name="description" id="description" rows="4"></textarea>
                 </div>
                 <div class="d-grid gap-1 col-4 mx-auto my-4">
@@ -133,7 +133,10 @@
                     <div class="card-body">
                         <h5 class="card-title text-light">{{ $product['name'] }}</h5>
                         <h6 class="card-subtitle mb-4 text-light fw-light">{{ $product['category'] }}</h6>
-                        <h5 class="card-text text-end text-light">${{ number_format($product['price'], 2) }}</h5>
+                        <h5 class="card-text text-end text-light">{{ number_format($product['price'], 2) }}€</h5>
+                        @auth
+                        <a class="card-text text-light" href="edit-product/{{$product['id']}}">Edit Product</a>
+                        @endauth
                     </div>
                 </div>
             </a>
