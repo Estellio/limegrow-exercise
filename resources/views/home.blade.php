@@ -125,6 +125,26 @@
 
     @endauth
 
+    <!-- Price range filter -->
+    <form action="/products" method="GET" class="row g-2 align-items-center justify-content-center" style="margin: 0">
+        <div class="col-auto">
+            <label for="min_price" class="form-label mb-0">Min Price:</label>
+            <input class="form-control" type="number" name="min_price" id="min_price" step="0.01" min="0" value="{{ request('min_price') }}">
+        </div>
+    
+        <div class="col-auto">
+            <label for="max_price" class="form-label mb-0">Max Price:</label>
+            <input class="form-control" type="number" name="max_price" id="max_price" step="0.01" min="0" value="{{ request('max_price') }}">
+        </div>
+    
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mt-4">Filter</button>
+        </div>
+    </form>
+    
+    
+
+    <!-- Make and display product elements -->
     <div class="container mt-5">
         <div class="row">
             @foreach($products as $product)
@@ -134,6 +154,7 @@
                         <h5 class="card-title text-light">{{ $product['name'] }}</h5>
                         <h6 class="card-subtitle mb-4 text-light fw-light">{{ $product['category'] }}</h6>
                         <h5 class="card-text text-end text-light">{{ number_format($product['price'], 2) }}€</h5>
+                        <!-- If loged in (admin) then display the Edit Product function link -->
                         @auth
                         <a class="card-text text-light" href="edit-product/{{$product['id']}}">Edit Product</a>
                         @endauth

@@ -21,3 +21,4 @@ Route::get('/show-product/{product}', [ProductController::class, 'showProductVie
 Route::get('/edit-product/{product}', [ProductController::class, 'showEditScreen']);
 Route::put('/edit-product/{product}', [ProductController::class, 'updateProduct']);
 Route::delete('/delete-product/{product}', [ProductController::class, 'deleteProduct']);
+Route::get('/products', [ProductController::class, 'filterByPrice']);

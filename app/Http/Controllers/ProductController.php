@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
 use Log;
+use session;
 use Exception;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -21,11 +21,12 @@ class ProductController extends Controller
             'stock' => ['required', 'integer'],
             'category' => 'string'
         ]);
-
+    
         Product::create($incomingFields);
-
+    
+        // Display a success message
         session()->flash('success', 'Product added successfully!');
-        
+            
         return redirect('/');
     }
 
@@ -34,7 +35,11 @@ class ProductController extends Controller
     }
 
     public function showEditScreen(Product $product) {
-        return view('edit-product', ['product' => $product]);
+        if(session('success')) {
+            return view('edit-product', ['product' => $product]);
+        }
+
+        return redirect('/');
     }
 
     public function updateProduct(Product $product, Request $request) {
@@ -46,8 +51,6 @@ class ProductController extends Controller
             'stock' => ['required', 'integer']
         ]);
 
-        //dd($incomingFields->only(['ean', 'name', 'description', 'price', 'stock']));
-
         $product->update($incomingFields);
         return redirect('/');
     }
@@ -56,4 +59,15 @@ class ProductController extends Controller
         $product->delete();
         return redirect('/');
     }
+
+    public function filterByPrice(Request $request) {
+
+    // Define minimum and maximum prices
+    $minPrice = $request->get('min_price', 0);
+    $maxPrice = $request->get('max_price', 1000);
+
+    $products = Product::whereBetween('price', [$minPrice, $maxPrice])->get();
+
+    return view('/home', compact('products'));
+}
 }
