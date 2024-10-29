@@ -21,7 +21,7 @@ class AdminController extends Controller
             $request->session()->regenerate();
         }
 
-        return redirect('/')->with('success', 'Session works!');
+        return redirect('/');
     }
 
     public function register(Request $request) {
