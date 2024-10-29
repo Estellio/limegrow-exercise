@@ -12,7 +12,6 @@ class AdminController extends Controller
 {
 
     public function login (Request $request) {
-        
         $incomingFields = $request->validate([
             'loginname' => 'required',
             'loginpassword' => 'required'
@@ -22,7 +21,7 @@ class AdminController extends Controller
             $request->session()->regenerate();
         }
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Session works!');
     }
 
     public function register(Request $request) {

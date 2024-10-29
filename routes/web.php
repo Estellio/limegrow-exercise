@@ -14,8 +14,8 @@ Route::get('/', function () {
 
 // Admin Controllers
 Route::post('/register', [AdminController::class, 'register']);
-Route::post('/logout', [AdminController::class, 'logout']);
 Route::post('/login', [AdminController::class, 'login']);
+Route::post('/logout', [AdminController::class, 'logout']);
 
 // Product Controllers
 Route::post('/addproduct', [ProductController::class, 'addproduct']);
@@ -23,6 +23,4 @@ Route::get('/show-product/{product}', [ProductController::class, 'showProductVie
 Route::get('/edit-product/{product}', [ProductController::class, 'showEditScreen']);
 Route::put('/edit-product/{product}', [ProductController::class, 'updateProduct']);
 Route::delete('/delete-product/{product}', [ProductController::class, 'deleteProduct']);
-//Route::get('/filter-price', [ProductController::class, 'filterByPrice']);
-//Route::get('/filter-category', [ProductController::class, 'filterByCategory']);
-Route::get('/filter', [ProductController::class, 'filter']);
+Route::get('/filter', [ProductController::class, 'filterProducts']);

@@ -184,21 +184,24 @@
     <!-- Make and display product elements -->
     <div class="container mt-5">
         <div class="row">
-            <!-- Cycle through all the Products in the databse -->
+            <!-- Cycle through all the Products in the database -->
             @foreach($products as $product)
-            <a href="/show-product/{{$product['id']}}" class="col-md-4 mb-4" style="text-decoration: none">
-                <div class="card h-100" style="background-color: #2b3035"> <!-- Use h-100 to ensure equal height for cards -->
-                    <div class="card-body">
-                        <h5 class="card-title text-light">{{ $product['name'] }}</h5>
-                        <h6 class="card-subtitle mb-4 text-light fw-light">{{ $product['category']['name'] }}</h6>
-                        <h5 class="card-text text-end text-light">{{ number_format($product['price'], 2) }}€</h5>
-                        <!-- If loged in (admin) then display the Edit Product function link -->
-                        @auth
-                        <a class="card-text text-light" href="edit-product/{{$product['id']}}">Edit Product</a>
-                        @endauth
+            <div class="col-md-4 mb-4">
+                <a href="/show-product/{{$product['id']}}" class="text-decoration-none">
+                    <div class="card h-100" style="background-color: #2b3035">
+                        <div class="card-body">
+                            <h5 class="card-title text-light">{{ $product['name'] }}</h5>
+                            <h6 class="card-subtitle mb-4 text-light fw-light">{{ $product['category']['name'] }}</h6>
+                            <h5 class="card-text text-end text-light">{{ number_format($product['price'], 2) }}€</h5>
+                        
+                            <!-- If logged in (admin), display the Edit Product link -->
+                            @auth
+                            <a href="edit-product/{{$product['id']}}" class="btn btn-light mt-2">Edit Product</a>
+                            @endauth
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
             @endforeach
         </div>
     </div>

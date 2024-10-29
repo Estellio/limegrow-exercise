@@ -36,11 +36,13 @@ class ProductController extends Controller
     }
 
     public function showEditScreen(Product $product) {
-        if(session('success')) {
+        // Sessions stopped working at one point and I can't figure out why, so for now the Edit page has no authentication
+        /*if(session('success')) {
             return view('edit-product', ['product' => $product]);
         }
+        return redirect('/');*/
 
-        return redirect('/');
+        return view('edit-product', ['product' => $product]);
     }
 
     public function updateProduct(Product $product, Request $request) {
@@ -61,32 +63,7 @@ class ProductController extends Controller
         return redirect('/');
     }
 
-    /*public function filterByPrice(Request $request) {
-        
-        // Define minimum and maximum prices
-        $minPrice = $request->get('min_price', 0);
-        $maxPrice = $request->get('max_price', 1000);
-        
-        $products = Product::whereBetween('price', [$minPrice, $maxPrice])->get();
-        $categories = Category::all();
-        
-        return view('/home', compact('products', 'categories'));
-    }
-
-    public function filterByCategory(Request $request) {
-
-        $category_id = $request->get('category_id');
-        $categories = Category::all();
-
-        // Filter products by category
-        $products = Product::when($category_id, function($query) use ($category_id) {
-            return $query->where('category_id', $category_id);
-        })->get();
-
-        return view('/home', compact('products', 'categories'));
-    }*/
-
-    public function filter(Request $request) {
+    public function filterProducts(Request $request) {
         $categories = Category::all();
         $query = Product::query();
     
