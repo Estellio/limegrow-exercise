@@ -7,7 +7,9 @@
     <title>Edit - {{$product['name']}}</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
+
 <body class="d-flex flex-column justify-content-center align-items-center bg-dark" style="height: 100vh; color: white">
+    <!-- Edit Product form (product category can not be changed)-->
     <h1 class="mb-4">Edit Product</h1>
     <form class="col-8" action="/edit-product/{{$product['id']}}" method="POST">
         @csrf
@@ -29,6 +31,7 @@
         <div class="mb-3">
             <textarea class="form-control" name="description" id="description" rows="4">{{$product['description']}}</textarea>
         </div>
+        <!-- Submit the Product Changes button -->
         <div class="d-grid gap-1 col-4 mx-auto my-4">
             <button class="btn btn-success">Save Edit</button>
         </div>
