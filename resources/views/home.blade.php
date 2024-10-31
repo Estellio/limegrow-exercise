@@ -71,7 +71,7 @@
         </div>
     </div>
 
-    <!-- If Product was added to the database succesfuly, display a dismissable success alert -->
+    <!-- If Product was added to the database/edited/user loged in/signed up successfuly, display a dismissable success alert -->
     @if(session('success'))
     <div class="d-flex justify-content-center">
         <div class="alert alert-success alert-dismissible fade show col-8 col-sm-4 col-xl-3" role="alert">
@@ -80,7 +80,6 @@
         </div>
     </div>
     @endif
-
 
     @else
     <!-- When not loged in, display log in button to toggle login form-->

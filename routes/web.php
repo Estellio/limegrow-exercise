@@ -1,10 +1,10 @@
 <?php
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
-use App\Models\Category;
 
 Route::get('/', function () {
     $products = Product::all();

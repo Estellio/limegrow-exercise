@@ -21,6 +21,8 @@ class AdminController extends Controller
             $request->session()->regenerate();
         }
 
+        // Display a success message
+        session()->flash('success', 'Welcome ' . $incomingFields['loginname'] . '!');
         return redirect('/');
     }
 
@@ -33,6 +35,8 @@ class AdminController extends Controller
         $incomingFields['password'] = bcrypt($incomingFields['password']);
         $user = User::create($incomingFields);
         auth()->login($user);
+        // Display a success message
+        session()->flash('success', 'Welcome ' . $incomingFields['name'] . '!');
         return redirect('/');
     }
 

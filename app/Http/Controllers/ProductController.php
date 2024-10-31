@@ -24,7 +24,6 @@ class ProductController extends Controller
         ]);
     
         Product::create($incomingFields);
-    
         // Display a success message
         session()->flash('success', 'Product added successfully!');
             
@@ -36,12 +35,7 @@ class ProductController extends Controller
     }
 
     public function showEditScreen(Product $product) {
-        // Sessions stopped working at one point and I can't figure out why, so for now the Edit page has no authentication
-        /*if(session('success')) {
-            return view('edit-product', ['product' => $product]);
-        }
-        return redirect('/');*/
-
+        // For now the Edit page has no authentication
         return view('edit-product', ['product' => $product]);
     }
 
@@ -54,6 +48,8 @@ class ProductController extends Controller
             'stock' => ['required', 'integer']
         ]);
 
+        // Display a success message
+        session()->flash('success', 'Product changed successfully!');
         $product->update($incomingFields);
         return redirect('/');
     }
@@ -69,15 +65,15 @@ class ProductController extends Controller
     
         // Filter by category if selected
         if ($request->filled('category_id')) {
-            $query->where('category_id', $request->category_id);
+            $query->where('category_id', $request['category_id']);
         }
     
         // Filter by price range if set
         if ($request->filled('min_price')) {
-            $query->where('price', '>=', $request->min_price);
+            $query->where('price', '>=', $request['min_price']);
         }
         if ($request->filled('max_price')) {
-            $query->where('price', '<=', $request->max_price);
+            $query->where('price', '<=', $request['max_price']);
         }
     
         $products = $query->get();
